@@ -1,0 +1,10 @@
+.custom-menu ul li{ 
+    margin-right: 2px;
+}
+
+@media (max-width: 640px) {
+    .custom-menu ul li{
+        margin-right:0;
+
+    }
+}

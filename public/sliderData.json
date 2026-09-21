@@ -1,0 +1,28 @@
+
+
+[
+  {
+    "id": 1,
+    "heading": "Fresh Tea, Fresh Moments",
+    "text": "Enjoy the finest tea leaves, carefully selected for a perfect cup.",
+    "image": "https://cdn.pixabay.com/photo/2017/10/04/12/10/peppermint-2816012_1280.jpg"
+  },
+  {
+    "id": 2,
+    "heading": "Taste the Tradition",
+    "text": "Experience the rich taste and timeless tradition of authentic tea.",
+    "image": "https://orientalteabox.com/cdn/shop/articles/Black_Tea_Pairing_Cover_1200x.jpg"
+  },
+  {
+    "id": 3,
+    "heading": "A Cup of Happiness",
+    "text": "Relax, refresh, and enjoy every sip of your favorite tea.",
+    "image": "https://teacultureoftheworld.com/cdn/shop/articles/colorful-background-with-two-tea-cups-2023-11-27-05-36-50-utc.jpg"
+  },
+  {
+    "id": 4,
+    "heading": "Premium Quality Tea",
+    "text": "Handpicked tea leaves delivering exceptional flavor and aroma.",
+    "image": "https://richard-tea.com/upload/iblock/0fd/0g01n4rglqk27pt65dlgzdfa6df5o7yj/shutterstock_2139939275.jpg"
+  }
+]
