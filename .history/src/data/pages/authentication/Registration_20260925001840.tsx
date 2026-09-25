@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
-import { getAuth, reload } from 'firebase/auth';
-import { app } from '../../firebase/firebase.config';
 
 
 interface IFormInput {
@@ -11,13 +9,13 @@ interface IFormInput {
     email: string
     password: string
     rePassword: string
-    photoUrl: string
-
+  
 }
 
-const auth = getAuth(app);
+
+// const { createUser } = useAuth();
+
 const Registration = () => {
-    const { createUser, updateUserProfile } = useAuth();
     const { register,
         handleSubmit,
         reset,
@@ -27,26 +25,11 @@ const Registration = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         console.log(data)
-        createUser(data.email, data.password)
-            .then(res => {
-                const loggedUser = res.user;
-                console.log(loggedUser);
-
-                updateUserProfile(data.name, data.photoUrl)
-                    .then(async () => {
-                        console.log('user profile updated');
-                        if (auth.currentUser) {
-                            await reload(auth.currentUser);
-                        }
-
-                        //create user entry in the database
-
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email
-                        }
-                    })
-            })
+        // createUser(data.email, data.password)
+        //     .then(res => {
+        //         const loggedUser = res.user;
+        //         console.log(loggedUser);
+        //     })
 
     }
 
@@ -98,10 +81,6 @@ const Registration = () => {
                                     })}
                                     type="password" className="input" placeholder="Re-Password" />
                                 {errors.rePassword && (<p>{errors.rePassword.message}</p>)}
-
-                                <input  {...register("photoUrl", { required: true })} type="text" className="input" placeholder="Photo url" />
-                                <br />
-                                {errors.photoUrl && <span className='text-red-400'>photoUrl is required</span>}
                                 <button className="btn btn-neutral mt-4">Register</button>
                                 <div className='flex gap-5'>
                                     <div className="">Already have an account? </div>

@@ -16,7 +16,6 @@ interface AuthContextType {
     loading: boolean;
     // createUser: any;
     createUser: (email: string, password: string) => Promise<any>;
-    updateUserProfile: (name: string, photo: string) => Promise<any>;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -42,11 +41,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
     const updateUserProfile = (name:string, photo: string)=>{
         console.log(auth.currentUser);
-
-        if(!auth.currentUser){
-            return Promise.reject(new Error ("No authticated user"));
-        }
-        return updateProfile(auth.currentUser, {
+        return updateProfile(auth.currentUser | null, {
             displayName: name,
             photoURL: photo
         })

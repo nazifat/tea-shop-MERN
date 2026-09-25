@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useState, type ReactNode } from "react";
 import { app } from '../firebase/firebase.config'
 import type { User } from "firebase/auth/web-extension";
@@ -16,7 +16,6 @@ interface AuthContextType {
     loading: boolean;
     // createUser: any;
     createUser: (email: string, password: string) => Promise<any>;
-    updateUserProfile: (name: string, photo: string) => Promise<any>;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -42,12 +41,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
     const updateUserProfile = (name:string, photo: string)=>{
         console.log(auth.currentUser);
-
-        if(!auth.currentUser){
-            return Promise.reject(new Error ("No authticated user"));
-        }
-        return updateProfile(auth.currentUser, {
-            displayName: name,
+        return updateUserProfile(auth.currentUser | null, {
+            displaName: name,
             photoURL: photo
         })
     }

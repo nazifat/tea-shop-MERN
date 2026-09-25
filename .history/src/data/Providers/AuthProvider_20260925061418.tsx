@@ -16,7 +16,6 @@ interface AuthContextType {
     loading: boolean;
     // createUser: any;
     createUser: (email: string, password: string) => Promise<any>;
-    updateUserProfile: (name: string, photo: string) => Promise<any>;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);

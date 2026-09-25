@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router';
-import { useAuth } from '../../hooks/useAuth';
-import { getAuth, reload } from 'firebase/auth';
-import { app } from '../../firebase/firebase.config';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 interface IFormInput {
@@ -11,57 +9,39 @@ interface IFormInput {
     email: string
     password: string
     rePassword: string
-    photoUrl: string
+  
 
 }
-
-const auth = getAuth(app);
+const {createUser}= useContext(AuthContext)
 const Registration = () => {
-    const { createUser, updateUserProfile } = useAuth();
-    const { register,
+    const {register,
         handleSubmit,
         reset,
         formState,
         formState: { isSubmitSuccessful, errors },
-    } = useForm<IFormInput>()
+} = useForm<IFormInput>()
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const onSubmit: SubmitHandler<IFormInput> =(data)=>
         console.log(data)
-        createUser(data.email, data.password)
-            .then(res => {
-                const loggedUser = res.user;
-                console.log(loggedUser);
 
-                updateUserProfile(data.name, data.photoUrl)
-                    .then(async () => {
-                        console.log('user profile updated');
-                        if (auth.currentUser) {
-                            await reload(auth.currentUser);
-                        }
 
-                        //create user entry in the database
 
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email
-                        }
-                    })
-            })
-
+React.useEffect(()=>{
+    if(formState.isSubmitSuccessful){
+        reset({
+            name: "",
+            email: "",
+            password: "",
+            rePassword: ""
+        })
     }
+},[formState, reset])
 
-    React.useEffect(() => {
-        if (formState.isSubmitSuccessful) {
-            reset({
-                name: "",
-                email: "",
-                password: "",
-                rePassword: ""
-            })
-        }
-    }, [formState, reset])
+const onSubmit = (data) =>{
+    console.log("data",data)
+}
 
-    return (
+        return (
         <div>
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content flex-col">
@@ -80,7 +60,7 @@ const Registration = () => {
                                     {...register("name")}
                                     type="text" className="input" placeholder="Name" />
                                 <input
-                                    {...register("password", {
+                                    {...register("password",{
                                         required: "Password is required",
                                         pattern: {
                                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
@@ -89,19 +69,15 @@ const Registration = () => {
                                     })}
                                     type="password" className="input" placeholder="Password" />
 
-                                {errors.password && <p>{errors.password.message}</p>}
+                                    {errors.password && <p>{errors.password.message}</p>}
                                 <input
                                     {...register("rePassword", {
                                         required: "Please confirm your password",
                                         validate: (value, formValues) =>
-                                            value === formValues.password || "Passwords do not match"
+                                            value=== formValues.password || "Passwords do not match"
                                     })}
                                     type="password" className="input" placeholder="Re-Password" />
-                                {errors.rePassword && (<p>{errors.rePassword.message}</p>)}
-
-                                <input  {...register("photoUrl", { required: true })} type="text" className="input" placeholder="Photo url" />
-                                <br />
-                                {errors.photoUrl && <span className='text-red-400'>photoUrl is required</span>}
+                                    {errors.rePassword && (<p>{errors.rePassword.message}</p>)}
                                 <button className="btn btn-neutral mt-4">Register</button>
                                 <div className='flex gap-5'>
                                     <div className="">Already have an account? </div>
@@ -113,7 +89,7 @@ const Registration = () => {
                 </div>
             </div>
         </div>
-    );
+        );
 };
 
-export default Registration;
+        export default Registration;
