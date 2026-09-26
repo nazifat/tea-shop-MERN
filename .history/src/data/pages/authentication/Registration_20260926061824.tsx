@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import { Link, useNavigate, useNavigationType } from 'react-router';
+import { Link } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { getAuth, reload } from 'firebase/auth';
 import { app } from '../../firebase/firebase.config';
@@ -19,7 +19,6 @@ interface IFormInput {
 const auth = getAuth(app);
 const Registration = () => {
     const { createUser, updateUserProfile } = useAuth();
-    const navigate = useNavigate();
     const { register,
         handleSubmit,
         reset,
@@ -45,7 +44,6 @@ const Registration = () => {
                                 icon: "success",
                                 draggable: true
                             });
-                            navigate('/');
 
 
                         }

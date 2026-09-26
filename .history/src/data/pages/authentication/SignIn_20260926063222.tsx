@@ -21,9 +21,6 @@ const SignIn = () => {
             const user= result.user;
             console.log('success', user);
         })
-        .catch((error)=>{
-            console.log('Login error', error.message);
-        })
 
     }
     return (

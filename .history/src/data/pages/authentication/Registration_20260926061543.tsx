@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import { Link, useNavigate, useNavigationType } from 'react-router';
+import { Link } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { getAuth, reload } from 'firebase/auth';
 import { app } from '../../firebase/firebase.config';
-import Swal from 'sweetalert2';
 
 
 interface IFormInput {
@@ -19,7 +18,6 @@ interface IFormInput {
 const auth = getAuth(app);
 const Registration = () => {
     const { createUser, updateUserProfile } = useAuth();
-    const navigate = useNavigate();
     const { register,
         handleSubmit,
         reset,
@@ -37,17 +35,8 @@ const Registration = () => {
                 updateUserProfile(data.name, data.photoUrl)
                     .then(async () => {
                         console.log('user profile updated');
-
                         if (auth.currentUser) {
                             await reload(auth.currentUser);
-                            Swal.fire({
-                                title: "Registration Successful!",
-                                icon: "success",
-                                draggable: true
-                            });
-                            navigate('/');
-
-
                         }
 
                         //create user entry in the database
@@ -57,7 +46,9 @@ const Registration = () => {
                             email: data.email
                         }
 
-
+                        if(res.data){
+                            console.log("registraton completed");
+                        }
                     })
             })
 

@@ -16,15 +16,6 @@ const SignIn = () => {
         const password= form.password.value;
         console.log(email, password);
 
-        signIn(email, password)
-        .then(result=> {
-            const user= result.user;
-            console.log('success', user);
-        })
-        .catch((error)=>{
-            console.log('Login error', error.message);
-        })
-
     }
     return (
         <div>
