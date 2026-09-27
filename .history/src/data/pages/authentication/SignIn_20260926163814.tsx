@@ -57,7 +57,7 @@ const SignIn = () => {
                                         required />
                                     <button type='button'
                                         onClick={() => setShowPassword((prev) => !prev)}
-                                        className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-100'
+                                        className='absolute right-3 top-1/2 '
                                     > 
                                         {showPassword? <FaEyeSlash/> : <FaEye/>}
                                     </button>

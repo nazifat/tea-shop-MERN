@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const SignIn = () => {
     const { signIn } = useAuth();
@@ -48,19 +47,9 @@ const SignIn = () => {
                             <fieldset className="fieldset">
                                 <input type="email" name='email' className="input" placeholder="Email" required />
 
-                                <div className='relative'>
-                                    <input
-                                        type={showPassword ? 'text' : 'password'}
-                                        name='password' 
-                                        className="input w-full pr-10   px-3 py-2" 
-                                        placeholder="Password" 
-                                        required />
-                                    <button type='button'
-                                        onClick={() => setShowPassword((prev) => !prev)}
-                                        className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-100'
-                                    > 
-                                        {showPassword? <FaEyeSlash/> : <FaEye/>}
-                                    </button>
+                                <div>
+                                <input type="password" name='password' className="input" placeholder="Password" required />
+                                <button type='button' onClick={()=> setShowPassword((prev) => !prev)}> </button>
                                 </div>
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 {/* login error message */}
