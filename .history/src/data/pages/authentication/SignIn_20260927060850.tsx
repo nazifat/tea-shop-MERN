@@ -11,7 +11,7 @@ const SignIn = () => {
 
     const [loginError, setLoginError] = useState<string | null>(null);
 
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -27,7 +27,7 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log('success', user);
-                navigate('/shop');
+                navigate('/')
                 
             })
             .catch((error) => {

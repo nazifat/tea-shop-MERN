@@ -27,6 +27,7 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log('success', user);
+                setUser(result.user)
                 navigate('/shop');
                 
             })

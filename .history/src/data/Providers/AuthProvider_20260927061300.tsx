@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createContext, useState, type ReactNode } from "react";
 import { app } from '../firebase/firebase.config'
 import type { User } from "firebase/auth/web-extension";
 
@@ -19,7 +19,6 @@ interface AuthContextType {
     updateUserProfile: (name: string, photo: string) => Promise<any>;
     signIn: (email: string, password: string) => Promise<any>;
     logOut: any;
-    setUser: any;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -27,14 +26,6 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-        return unsubscribe;
-    }, [])
 
     const createUser = (email: string, password: string) => {
         setLoading(true);
@@ -51,26 +42,25 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         setLoading(true);
         return signOut(auth);
     }
-    const updateUserProfile = (name: string, photo: string) => {
+    const updateUserProfile = (name:string, photo: string)=>{
         console.log(auth.currentUser);
 
-        if (!auth.currentUser) {
-            return Promise.reject(new Error("No authticated user"));
+        if(!auth.currentUser){
+            return Promise.reject(new Error ("No authticated user"));
         }
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photo
         })
     }
-
+ 
     const authInfo = {
         user,
         loading,
         createUser,
         signIn,
         logOut,
-        updateUserProfile,
-        setUser
+        updateUserProfile
     }
     return (
         <AuthContext.Provider value={authInfo}>

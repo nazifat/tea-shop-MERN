@@ -52,7 +52,7 @@ const Navbar = () => {
                     <div className="">
                         <div className=" bg-base-100">
                             {
-                                user ? <div className="md:flex items-center gap-3 rounded-full bg-gray-100 px-3 py-1.5">
+                                user ? <div className="flex items-center gap-3 rounded-full bg-gray-100 px-3 py-1.5">
                                     <div className="flex items-center gap-2">
 
                                         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500 text-xs font-semibold text-white">

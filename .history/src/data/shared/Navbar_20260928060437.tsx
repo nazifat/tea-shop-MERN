@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import './Navbar.css'
 import { useAuth } from "../hooks/useAuth";
 import { signOut } from "firebase/auth";
-import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -49,24 +48,17 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <div className="">
+                    <div className="aura aura-gold">
                         <div className=" bg-base-100">
                             {
-                                user ? <div className="md:flex items-center gap-3 rounded-full bg-gray-100 px-3 py-1.5">
-                                    <div className="flex items-center gap-2">
+                                user ? <>
+                                    <span className="text-sm font-medium text-gray-700">
+                                        {user?.displayName}
+                                    </span>
 
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500 text-xs font-semibold text-white">
-                                            {user?.displayName?.charAt(0).toUpperCase()}
-
-                                        </span>
-                                        <span className="text-sm font-medium text-gray-700">
-                                            {user?.displayName}
-                                        </span>
-
-                                    </div>
                                     <Link to='' className="flex items-center gap-1 rounded-full px-2 py-1 text-sm text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
-                                        onClick={signOutCustom}><CiLogout size={14} ></CiLogout>Logout</Link>
-                                </div>
+                                        onClick={signOutCustom}>Logout</Link>
+                                </>
                                     : <> <Link to='/sign-in' className="btn"> Login</Link>
 
                                     </>

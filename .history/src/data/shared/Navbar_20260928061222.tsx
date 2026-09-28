@@ -55,7 +55,7 @@ const Navbar = () => {
                                 user ? <div className="md:flex items-center gap-3 rounded-full bg-gray-100 px-3 py-1.5">
                                     <div className="flex items-center gap-2">
 
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500 text-xs font-semibold text-white">
+                                        <span className="md:flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500 text-xs font-semibold text-white">
                                             {user?.displayName?.charAt(0).toUpperCase()}
 
                                         </span>

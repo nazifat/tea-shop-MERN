@@ -11,7 +11,7 @@ const SignIn = () => {
 
     const [loginError, setLoginError] = useState<string | null>(null);
 
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
 
     const handleLogin = (e) => {
         e.preventDefault();
